@@ -1,0 +1,85 @@
+<div class="calculator">
+
+  <input type="text" class="calculator-screen" [value]="currentNumber" disabled />
+
+  <div class="calculator-keys">
+
+    <button type="button" (click) = "getOperation('+')" class="operator" value="+">+</button>
+      <button type="button" (click) = "getOperation('-')" class="operator" value="-">-</button>
+       <button type="button" (click) = "getOperation('*')" class="operator" value="*">&times;</button>
+       <button type="button" (click) = "getOperation('/')" class="operator" value="/">&divide;</button>
+
+
+
+    <button type="button" (click)="getNumber('7')" value="7">7</button>
+    <button type="button" (click)="getNumber('8')" value="8">8</button>
+    <button type="button" (click)="getNumber('9')" value="9">9</button>
+
+
+    <button type="button" (click)="getNumber('4')" value="4">4</button>
+    <button type="button" (click)="getNumber('5')" value="5">5</button>
+    <button type="button" (click)="getNumber('6')" value="6">6</button>
+
+
+    <button type="button" (click)="getNumber('1')" value="1">1</button>
+    <button type="button" (click)="getNumber('2')" value="2">2</button>
+    <button type="button" (click)="getNumber('3')" value="3">3</button>
+
+
+    <button type="button" (click)="getNumber('0')" value="0">0</button>
+    <button type="button" (click) = "getDecimal()" class="decimal" value=".">.</button>
+    <button type="button" (click) = "clear()" class="all-clear" value="all-clear">A\C</button>
+      
+       <button type="button" (click) = "getOperation('=')" class="equal-sign" value="=">=</button>
+  </div>
+</div>
+  
+<script>
+(function(){
+
+    var createEmbedFrame = function(){
+      var uid                   = "JSFEMB_" + (~~(new Date().getTime() / 86400000))
+      var uriOriginal           = "http://jsfiddle.net/ayoisaiah/c8b9zsaq/10/embed"
+      var uriOriginalNoProtocol = uriOriginal.split("//").pop()
+      var uriEmbedded           = "http://jsfiddle.net/c8b9zsaq/10/embedded/?username=ayoisaiah"
+      var currentSlug           = "c8b9zsaq"
+      var target                = document.querySelector("script[src*='" + uriOriginalNoProtocol + "']")
+      var iframe                = document.createElement("iframe")
+  
+      iframe.src               = uriEmbedded
+      iframe.id                = uid
+      iframe.width             = "100%"
+      iframe.height            = "0"
+      iframe.frameBorder       = "0"
+      iframe.allowtransparency = true
+      iframe.sandbox           = "allow-modals allow-forms allow-same-origin allow-scripts allow-popups allow-top-navigation-by-user-activation allow-downloads"
+      iframe.allow             = "midi; geolocation; microphone; camera; display-capture; encrypted-media;"
+  
+      target.parentNode.insertBefore(iframe, target.nextSibling)
+  
+      var setHeight = function(data){
+        if (data.slug === currentSlug) {
+          var height = data.height <= 0 ? 400 : data.height + 50
+          iframe.height = height
+        }
+      }
+  
+      var listeners = function(event){
+        var eventName = event.data[0]
+        var data      = event.data[1]
+  
+        switch (eventName) {
+          case "embed":
+            setHeight(data)
+          case "resultsFrame":
+            setHeight(data)
+        }
+      }
+  
+      window.addEventListener("message", listeners, false)
+    }
+  
+    setTimeout(createEmbedFrame, 5)
+  
+  }).call(this)
+</script>
